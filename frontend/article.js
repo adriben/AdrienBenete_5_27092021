@@ -9,7 +9,19 @@ async function displayCamera(){ //affichage de la camera selectionner dans la pa
     document.getElementById('camera-description').innerText = camera.description;
     document.getElementById('camera-title').innerText = camera.name;
     document.getElementById('camera-price').innerText = camera.price /100;
+
+    let selection = document.querySelector("#lens-select")
+    let lenses = camera.lenses;
+    console.log(lenses);
+    for(lens of lenses){
+        let option = document.createElement('option');
+        option.innerText = lens;
+        selection.appendChild(option)
+       
+        
+    }
     
+    console.log(camera.lenses[0])
 }
 
 
@@ -32,6 +44,7 @@ const addToCartButton = document.querySelector('#add-to-cart'); //bouton ajouter
 
 addToCartButton.addEventListener('click',  event =>{ //au click on ajoute l article au panier et on remercie le client
     event.preventDefault();
+    
     
     document.querySelector('.alert').innerText = "Vous avez bien ajoute cette camera a votre panier"
     document.querySelector('.alert').className += " alert-success";
@@ -64,23 +77,42 @@ function addToCart(){
     localStorage.setItem("productQuantity", 1) //si le localstorage est vide, on ajoute le produit
     document.querySelector('.in-cart').textContent = 1;
    }
-   let cameraAdded = {
+   let cameraAdded = {//on creer un objet avec des valeurs 
     name: document.getElementById('camera-title').innerText,
     price: document.getElementById('camera-price').innerText,
-    img: document.getElementById('cameraImage').getAttribute('src')
+    img: document.getElementById('cameraImage').getAttribute('src'),
+    lens: document.getElementById('lens-select').value,
+    quantity: 1
     
     }
 
-    console.log(cameraAdded);
+    // console.log(cameraAdded.name);
 
     let cameraLocalStorage= JSON.parse(localStorage.getItem("productInCart"));
-    if(cameraLocalStorage){
-        cameraLocalStorage.push(cameraAdded);
+    if(cameraLocalStorage){ 
+        console.log(cameraAdded);
+        console.log(cameraLocalStorage);
+        
+    
+                cameraLocalStorage.push(cameraAdded);
         localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage))
+            
+        
+        
+        
+         //si il y a deja quelque chose dans le local storage
+     
 
-    }else{
+       
+       //On ajoute l element au tableau cameraLocalStorage
+            
+       
+    
+
+    }else{ //si il n y a rien dans le localstorgae on creer un tableau vide et on ajoute l objet
         cameraLocalStorage =[];
         cameraLocalStorage.push(cameraAdded);
+        
         localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage))
     }
 

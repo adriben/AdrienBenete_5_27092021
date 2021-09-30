@@ -29,8 +29,10 @@ function displayCameras() { //fonction pour faire apparaitre les cameras sur la 
       <img src="${camera.imageUrl}" alt="" class="card-img-top w-100">
       <div class="card-body">
         <h3 class="card-title text-center">${camera.name}</h3>
+        <div class="details">
         <p class="card-text">A partir de <strong>${camera.price/100}€</strong></p>
         <a class="btn btn-primary cameraLink" href="./article.html?id=${camera._id}">Details du produit</a>
+      </div>
       </div>
     </article>
     `;

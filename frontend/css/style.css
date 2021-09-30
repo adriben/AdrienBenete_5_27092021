@@ -11115,17 +11115,30 @@ textarea.form-control-lg {
 }
 .fa-shopping-cart {
   background: -webkit-linear-gradient(#c77a5f, #925cf7);
-  padding-right: 14px;
+  padding: 0 0 0 2px;
+  font-size: 120%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+header {
+  font-size: 130%;
+}
 header a {
   font-weight: bold;
   color: #ffff;
+  padding-left: 1rem;
+}
+header li {
+  padding-left: 4rem;
 }
 header .navbar-expand-lg .navbar-collapse {
   justify-content: flex-end;
+}
+
+.in-cart {
+  color: #ffff;
+  font-weight: bold;
 }
 
 .banniere img {
@@ -11152,7 +11165,7 @@ header .navbar-expand-lg .navbar-collapse {
 .bandeau {
   position: absolute;
   width: 100%;
-  top: 452px;
+  top: 462px;
   padding-bottom: 23px;
   left: 0;
   background-color: rgba(114, 20, 98, 0.8);
@@ -11163,16 +11176,9 @@ header .navbar-expand-lg .navbar-collapse {
 #productsDisplay {
   justify-content: center;
 }
-#productsDisplay article {
-  position: relative;
-}
-#productsDisplay article button {
-  margin-top: 1rem;
-}
-#productsDisplay article P {
-  position: absolute;
-  right: 40px;
-  bottom: 15px;
+#productsDisplay .details {
+  justify-content: space-around;
+  text-align: center;
 }
 
 footer {
@@ -11196,6 +11202,16 @@ footer i {
 
 .description {
   padding-top: 80px;
+}
+
+.products .oneArticle {
+  border: solid 2px purple;
+}
+.products i {
+  color: red;
+}
+.products i:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

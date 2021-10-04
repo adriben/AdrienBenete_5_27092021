@@ -17,10 +17,10 @@
 
 </head>
 <body>
-  <header class="bg-dark">
+  <header class="bg-light">
     <div class="container">
       <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-light">
           <a class="navbar-brand" href="index.html">
             <i class="fas fa-camera-retro"></i>
             
@@ -43,7 +43,7 @@
       </div>
     </div>    
 </header>
-    <main>
+    <main class="bg-light">
        <section class="background">
            <img  src="/frontend/images/1087908.jpg" alt="camera vintage" class="photoArticle w-4">
        </section>
@@ -59,12 +59,36 @@
         <h2 class="text-center mb-5" id="camera-title">Camera Titre</h2>
         
         <p class="pb-3 pt-4"><strong>A propos de ce produit: </strong><span id="camera-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></p>
+        <div>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <p>7 évaluations</p>
+
+        </div>
         <p><label for="lens-select"><strong> Choisissez un objectif  </strong></label>
+         
         
         <select name="lens" id="lens-select" class="mb-4">
          
           
         </select>
+      </p>
+      <p><label for="quantity-select"><strong> Quantite  </strong></label>
+         
+        
+        <select name="quantity" id="quantity-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+         
+          
+        </select>
+        <p class="text-danger">Le stock est presque epuise</p>
       </p>
         <div class='row mt-4 pt-5'>
         <p class="mb-4"><strong>PRIX: </strong><span id="camera-price"></span><strong>€</strong></p>

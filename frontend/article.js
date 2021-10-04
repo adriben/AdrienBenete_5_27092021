@@ -82,7 +82,7 @@ function addToCart(){
     price: document.getElementById('camera-price').innerText,
     img: document.getElementById('cameraImage').getAttribute('src'),
     lens: document.getElementById('lens-select').value,
-    quantity: 1
+    quantity: document.getElementById('quantity-select').value
     
     }
 
@@ -94,7 +94,7 @@ function addToCart(){
         console.log(cameraLocalStorage);
         
     
-                cameraLocalStorage.push(cameraAdded);
+        cameraLocalStorage.push(cameraAdded);
         localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage))
             
         

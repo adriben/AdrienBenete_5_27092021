@@ -99,7 +99,7 @@ hr:not([size]) {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: carnival, sans-serif;
+  font-family: "Lobster", sans-serif;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -11140,6 +11140,7 @@ header a {
 }
 header li {
   padding-left: 4rem;
+  position: relative;
 }
 header .navbar-expand-lg .navbar-collapse {
   justify-content: flex-end;
@@ -11148,6 +11149,17 @@ header .navbar-expand-lg .navbar-collapse {
 .in-cart {
   color: black;
   font-weight: bold;
+  position: absolute;
+  font-size: 70%;
+  top: 1px;
+  right: 0px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes slow-display {
@@ -11255,6 +11267,10 @@ footer i {
   padding-top: 80px;
 }
 
+#cameraImage {
+  object-fit: cover;
+}
+
 .fa-star-half-alt,
 .fa-star {
   color: #ffa705;
@@ -11281,6 +11297,13 @@ footer i {
 
 #address {
   width: 50%;
+}
+
+.title-cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */

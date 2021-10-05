@@ -27,6 +27,7 @@ header {
   }
   li{
       padding-left: 4rem;
+      position: relative;
   }
   .navbar-expand-lg .navbar-collapse{
     justify-content: flex-end;
@@ -36,6 +37,19 @@ header {
 .in-cart{
     color: rgb(0, 0, 0);
     font-weight: bold;
+    position: absolute;
+    font-size: 70%;
+    top: 1px;
+    right: 0px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: green;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   
+  
    
 }
 
@@ -167,6 +181,9 @@ header {
 
 
 }
+#cameraImage{
+    object-fit: cover;
+}
 .fa-star-half-alt,
 .fa-star{
     color: rgba(255, 167, 5, 1);
@@ -197,4 +214,11 @@ header {
 }
 #address{
     width: 50%;
+}
+
+.title-cart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

@@ -1,10 +1,12 @@
 //variable pour reccuperer le container ou on montre les produits
 const cameraContainer = document.getElementById('productsDisplay'); 
+const loader = document.querySelector('.loader'); //loader de la page d'acceuil
 
 //fonction principal qui reccupere les articles et les montres sur la page
 main() 
  async function main(){
     const cameras = await getCameras(); //stockage de l'objet contenant les cameras reccupere par le fetch 
+    loader.style.display = "none";
     for(camera of cameras)   //boucle qui itere sur tout les elements du tableau d objet cameras
         displayCameras()  
     }
@@ -17,7 +19,7 @@ async function getCameras(){
     }).then(response =>{
         return response  //retour de la reponse du fetch pour la fonction principale
     }).catch(err =>{ //err et message sur la page si le serveur ne fonctionne pas ou renvoie une erreur
-        cameraContainer.innerHTML = "<p class='text-center mt-5 pt-5 pb-5'><strong>Il semble que le serveur ne soit pas actif, veuillez reessayez dans 1 minute <br/>Nous sommes désolé pour la gêne occasionnée...</strong></p>"
+        cameraContainer.innerHTML = "<p class='text-center mt-5 pt-5 pb-5 mb-5'><strong>Il semble que le serveur ne soit pas actif, veuillez réessayez dans 1 minute <br/>Nous sommes désolé pour la gêne occasionnée...</strong></p>"
     })
 };
 
@@ -37,6 +39,7 @@ function displayCameras() { //fonction pour faire apparaitre les cameras sur la 
     </article>
     `;
   
+    
 }
 
 function displayCartNumbers(){  //fonction qui affiche le nombre de produit dans le panier

@@ -2,6 +2,11 @@
 
 let cameraLocalStorage= JSON.parse(localStorage.getItem("productInCart"));
 let productQuantity = JSON.parse(localStorage.getItem("productQuantity"));
+let cameraId = []; //on fait un tableau d'id pour envoyer au backend dans la requete POST
+for(camera of cameraLocalStorage){
+    cameraId.push(camera.id)
+}
+
 
 
 
@@ -9,28 +14,21 @@ let productQuantity = JSON.parse(localStorage.getItem("productQuantity"));
 if(cameraLocalStorage == null){
     document.querySelector('.products').innerHTML = "<h3 class='mt5 p-5'>Votre panier est vide pour le moment</h3>"
 }else{
-   
-
-   
     cameraLocalStorage.forEach(camera => { //on recupere les cameras et on boucles pour afficher les elements du ls
         
         document.querySelector('.products').innerHTML += `
         <div class="row mt-4 oneArticle">
-        
         <img class="w-25 col" src="${camera.img}">
-        
         <p class="col pt-5">${camera.name} </p>
         <p class="col pt-5">${camera.lens}</p>
-        <p class="col pt-5">x<span class="camera-quantity">${camera.quantity}<span></p>
+        <p class="col pt-5"><i class="far fa-arrow-alt-circle-left arrow-left"></i>
+        x<span class="camera-quantity">${camera.quantity}</span> 
+        <i class="far fa-arrow-alt-circle-right arrow-right"></i>
+        </p>
         <p class="col pt-5"><span class="price">${camera.price * camera.quantity}</span>€ </p>
         <i class="fas fa-trash-alt delete col pt-5"></i>
         </div>
-
-        
-        
         `
-        
-        
     });
 }
 
@@ -59,9 +57,7 @@ function calculateTotal(){
     for (let i=0; i < price.length;i++) {//on itere sur le tableau prix et on additione les valeurs
         total += Number(price[i])
         
-       }
-    
-      
+       } 
 }
 calculateTotal()
  
@@ -70,24 +66,16 @@ calculateTotal()
 
  document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`
 
-
-
-
-
-
-
 let oneArticle = document.querySelectorAll(".oneArticle") //on stoke un article et les boutons poubelles dans des variables
 let deleteBtn = document.querySelectorAll('.delete');
 // console.log(deleteBtn);
 let cameraQuantity = document.querySelectorAll(".camera-quantity")
 
-
 for(let i=0; i< deleteBtn.length; i++){   //fonction qui supprime l element et update le local storage au click sur la poubelle
    deleteBtn[i].onclick = function (e){
     
       console.log(productQuantity);
-      
-      e.target.parentNode.parentNode.remove()  //on supprime l'element dans le html
+    //   e.target.parentNode.parentNode.remove()  //on supprime l'element dans le html
       cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
       console.log(cameraQuantity[i]);
       productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
@@ -106,6 +94,58 @@ for(let i=0; i< deleteBtn.length; i++){   //fonction qui supprime l element et u
    }
     // console.log(cameraLocalStorage)
 }
+
+//Gerer la quantite du produit directement dans le panier
+
+let leftArrow = document.querySelectorAll('.arrow-left'); 
+let rightArrow = document.querySelectorAll('.arrow-right');
+
+for(let i =0; i<leftArrow.length; i++){
+    leftArrow[i].addEventListener('click', event =>{
+        cameraQuantity[i].innerText -=1;
+        productQuantity -= 1;
+        cameraLocalStorage[i].quantity -=1;
+        localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
+    localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
+    location.reload()
+    
+        if(cameraQuantity[i].innerText == 0){
+            cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
+      productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
+      localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
+      localStorage.setItem("productQuantity", JSON.stringify(productQuantity))//on retransforme les valeurs en JSOn
+      location.reload() //on rafraichi la page pour mettre a jour 
+     
+      if(productQuantity == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
+        localStorage.clear();
+      }
+
+        }
+
+    })
+   
+}
+
+for(let i =0; i< rightArrow.length; i++){
+    rightArrow[i].addEventListener('click', event =>{
+     
+       cameraQuantity[i].innerText = parseInt(cameraQuantity[i].innerText);
+       productQuantity += 1;
+    //   cameraQuantity[i].innerText = cameraQuantity[i].innerText +1
+        cameraLocalStorage[i].quantity +=1;
+        
+        
+        
+        
+        localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
+        localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
+        
+        location.reload()
+    })
+}
+
+
+
 
 ///////////////Formulaire/////
 
@@ -133,11 +173,43 @@ if(total == 0){
         alert("Veuillez finir de remplir le formulaire avant de procceder au payment")
     
 }else{
-    // on stock les valeur du formulaire dans un tableau 
-    let userInfo = [];
-    
-    document.location.href="order.html"
-}
+    // on stock les valeur du formulaire dans un objet comme dans controller camera.js
+    let order = {
+        contact:{
+          firstName: firstName.value,
+          lastName: lastName.value,
+           address: streetAddress.value,
+           city: cityName.value,
+           email: emailAddress.value
+         },
+         products: cameraId
+        }
+
+
+        //  localStorage.setItem("contact", JSON.stringify(contact))
+         console.log(order);
+
+         let response =  fetch('http://localhost:3000/api/cameras', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(order)
+          });
+
+      let result = response.json();
+      console.log(result);
+        
+        
+        
+        
+         // console.log(responseJ);
+     }
+
+        
+     
+    // document.location.href="order.html"
+
 
 
 })

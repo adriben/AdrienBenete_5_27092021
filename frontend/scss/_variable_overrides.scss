@@ -1,4 +1,12 @@
 $primary: rgba(27, 27, 27, 0.883);
 $headings-font-family: 'Lobster', sans-serif;
 $light: #e6e1d3;
-$font-family: "Glegoo", sans-serif
+$font-family: "Glegoo", sans-serif;
+
+
+@keyframes turn {
+    100%{
+        transform: translateY(-30px);
+    }
+    
+}

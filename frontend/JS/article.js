@@ -103,7 +103,7 @@ function addToCart(){
             break
            }else if(i == cameraLocalStorage.length -1){
             
-                
+            cameraAdded.quantity = parseInt(cameraAdded.quantity)
                 cameraLocalStorage.push(cameraAdded);
                 localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage));
                 break
@@ -118,6 +118,7 @@ function addToCart(){
     }else{ //si il n y a rien dans le localstorgae on creer un tableau vide et on ajoute l objet
         cameraLocalStorage =[];
         cameraLocalStorage.push(cameraAdded);
+        cameraAdded.quantity = parseInt(cameraAdded.quantity)
         
         localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage))
     }

@@ -3,8 +3,11 @@
 let cameraLocalStorage= JSON.parse(localStorage.getItem("productInCart"));
 let productQuantity = JSON.parse(localStorage.getItem("productQuantity"));
 let cameraId = []; //on fait un tableau d'id pour envoyer au backend dans la requete POST
-for(camera of cameraLocalStorage){
+
+if (cameraLocalStorage){ //on itere sur toutes les cameras pour faire un nouveau tableau d id
+    for(camera of cameraLocalStorage){
     cameraId.push(camera.id)
+}
 }
 
 
@@ -133,19 +136,11 @@ for(let i =0; i< rightArrow.length; i++){
        productQuantity += 1;
     //   cameraQuantity[i].innerText = cameraQuantity[i].innerText +1
         cameraLocalStorage[i].quantity +=1;
-        
-        
-        
-        
         localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
         localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
-        
         location.reload()
     })
 }
-
-
-
 
 ///////////////Formulaire/////
 
@@ -159,14 +154,13 @@ let postCode = document.querySelector('#postcode');
 let cityName = document.querySelector('#city')
 // console.log(cityName);
 const submitBtn = document.querySelector('#submit');
-const form = document.querySelector('#my-form')
+const form = document.querySelector('#my-form');
 
 
 form.addEventListener('submit', event =>{
     event.preventDefault();
 
-if(total == 0){
-    
+if(total == 0){   
     alert("Votre panier est vide, veuillez selectioner un ou plusieur article avant de procceder au payment")
 }else if(!lastName.value || !firstName.value || !emailAddress.value || !streetAddress.value
     || !postCode.value || !cityName.value){
@@ -185,32 +179,36 @@ if(total == 0){
          products: cameraId
         }
 
+        async function postOrder(data){ // fonction method post pour envoyer les infos au back end
 
-        //  localStorage.setItem("contact", JSON.stringify(contact))
-         console.log(order);
+            fetch("http://localhost:3000/api/cameras/order", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+              }).then((responseJ) =>{
+                  console.log(responseJ);
+                return responseJ.json()
+              }).then(result =>{
+                console.log(result.orderId)
+                localStorage.setItem("orderId", JSON.stringify(result.orderId));
+                localStorage.setItem('totalPrice', JSON.stringify(total));
+                document.location.href="./order.html";
+                  return result
+                  
+                  
+              } ).catch(err =>{
+                  console.log(err)
+              })
+            
+              
+            }
+    
+      postOrder(order);
 
-         let response =  fetch('http://localhost:3000/api/cameras', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(order)
-          });
 
-      let result = response.json();
-      console.log(result);
-        
-        
-        
-        
-         // console.log(responseJ);
      }
-
-        
-     
-    // document.location.href="order.html"
-
-
 
 })
 

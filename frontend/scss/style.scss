@@ -7,7 +7,10 @@
 
 body{
     font-family: "Glegoo", sans-serif;
+    margin: 0;
+   
 }
+
 
 .fa-shopping-cart{
     background: -webkit-linear-gradient(#c77a5f, #925cf7);
@@ -74,6 +77,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     height: 700px;
+    width: 100%;
     justify-content: center;
     position: relative;
     .hero-text{
@@ -122,6 +126,12 @@ header {
  #productsDisplay{
      justify-content: center;
      min-height: 180px;
+     @media screen and (max-width: 600px) {
+        margin: 0 1rem;
+       
+
+    }
+     
     
 
      .details{
@@ -150,9 +160,12 @@ header {
 
  footer{
      color: white;
+    
      .row-footer{
          width: fit-content;
          margin: auto;
+         align-items: center;
+         justify-content: center;
          
 
 
@@ -163,6 +176,14 @@ header {
      i{
          color: white;
          font-size: 150%;
+         
+     }
+     a{
+         color: white;
+         text-decoration: none;
+         &:hover{
+             color: yellow;
+         }
      }
  }
  //loader
@@ -206,6 +227,13 @@ header {
     position: relative;
     
 }
+.productsDisplay{
+    @media screen and (max-width: 950px) {
+        width: 100%;
+       
+
+    }
+}
 
 .description{
     padding-top: 80px;
@@ -214,7 +242,14 @@ header {
 }
 #cameraImage{
     object-fit: cover;
+    width: 50%;
+    @media screen and (max-width: 990px) {
+        width: fit-content ;
+    
+        
+    }
 }
+
 .fa-star-half-alt,
 .fa-star{
     color: rgba(255, 167, 5, 1);
@@ -262,6 +297,16 @@ header {
     align-items: center;
 }
 
+.oneArticle{
+   
+    @media screen and (max-width: 400px) {
+        
+        img{
+            display: none;
+        }
+       
 
+    }
+}
 
 

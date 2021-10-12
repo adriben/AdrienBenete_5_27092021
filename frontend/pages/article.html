@@ -15,7 +15,7 @@
     <script src="/frontend/JS/article.js" defer></script>
     
     
-    <title>Orinoco</title>
+    <title>Details du produit</title>
 
 </head>
 <body>
@@ -26,9 +26,9 @@
           <a class="navbar-brand" href="/frontend/index.html">
             <i class="fas fa-camera-retro"></i>
             
-            OrinoCamera
+            OriCamera
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div id="navbarContent" class="collapse navbar-collapse">
@@ -50,15 +50,15 @@
            <img  src="/frontend/images/1087908.jpg" alt="camera vintage" class="photoArticle w-4">
        </section>
     
-       <section class="productsDisplay">
+       <section class="productsDisplay container">
         
         <div class="alert" role="alert"></div>
-        <div class="container row">
+        <div class="row">
         
-        <img id="cameraImage" src="" alt="" class="w-50 mt-3">
+        <img id="cameraImage" src="/frontend/images" alt="photo de camera" class="mt-3">
       
       <div class="description col-md-6 pt-5">
-        <h2 class="text-center mb-5" id="camera-title">Camera Titre</h2>
+        <h1 class="text-center mb-5" id="camera-title">Camera Titre</h1>
         
         <p class="pb-3 pt-4"><strong>A propos de ce produit: </strong><span id="camera-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></p>
         <div>
@@ -78,7 +78,7 @@
           
         </select>
       </p>
-      <p><label for="quantity-select"><strong> Quantite  </strong></label>
+      <p><label for="quantity-select"><strong> Quantité  </strong></label>
          
         
         <select name="quantity" id="quantity-select">
@@ -90,8 +90,7 @@
          
           
         </select>
-        <p class="text-danger">Le stock est presque epuise</p>
-      </p>
+        <p class="text-danger">Le stock est presque epuisé!</p>
         <div class='row mt-4 pt-5'>
         <p class="mb-4"><strong>PRIX: </strong><span id="camera-price"></span><strong>€</strong></p>
         <a href="" class="btn btn-primary " id="add-to-cart">Ajouter au Panier</a>
@@ -106,23 +105,21 @@
 
     </main>
 
-    <footer class="bg-dark pt-4">
-        <p class="text-center">OniroCamera-Specialiste des cameras vintages de collection</p>
-        <div class="row rowFooter">
-            <a class="social col-4 text-center" href="https://www.instagram.com/" title="instagram"><i class="fab fa-instagram"></i>
-            </a>
-            <a class="social col-4 text-center" href="https://www.facebook.com/" title="facebook"><i class="fab fa-facebook"></i>
-                <a class="social col-4 text-center" href="https://www.facebook.com/" title="facebook"><i class="fab fa-twitter"></i>
-            </a>
-        </div>
-    
-        <ul class="list-inline text-center mt-4">
-            <li class="list-inline-item p-3">Mentions Legales</li>
-            <li class="list-inline-item p-3">Nous contacter</li>
-            <li class="list-inline-item p-3">Devis</li>
-        </ul>
-   
-    </footer>
+    <footer class="bg-dark">
+      <p class="text-center">OriCamera-Specialiste des cameras vintages de collection</p>
+      <div class="row row-footer">
+          <a class="social col-4 text-center" href="https://www.instagram.com/" title="instagram"><i class="fab fa-instagram"></i></a>
+          <a class="social col-4 text-center" href="https://www.facebook.com/" title="facebook"><i class="fab fa-facebook"></i></a>
+          <a class="social col-4 text-center" href="https://www.twitter.com/" title="twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+  
+      <ul class="list-inline text-center mt-4">
+          <li class="list-inline-item p-3"><a href="#">Mentions Legales</a></li>
+          <li class="list-inline-item p-3"><a href="#">Nous contacter</a></li>
+          <li class="list-inline-item p-3"><a href="#">Devis</a></li>
+      </ul>
+  
+  </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

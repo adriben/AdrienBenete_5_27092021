@@ -11125,6 +11125,7 @@ textarea.form-control-lg {
 }
 body {
   font-family: "Glegoo", sans-serif;
+  margin: 0;
 }
 
 .fa-shopping-cart {
@@ -11187,6 +11188,7 @@ header .navbar-expand-lg .navbar-collapse {
   background-repeat: no-repeat;
   background-size: cover;
   height: 700px;
+  width: 100%;
   justify-content: center;
   position: relative;
 }
@@ -11230,6 +11232,11 @@ header .navbar-expand-lg .navbar-collapse {
   justify-content: center;
   min-height: 180px;
 }
+@media screen and (max-width: 600px) {
+  #productsDisplay {
+    margin: 0 1rem;
+  }
+}
 #productsDisplay .details {
   justify-content: space-around;
   text-align: center;
@@ -11252,6 +11259,8 @@ footer {
 footer .row-footer {
   width: fit-content;
   margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 footer li {
   list-style: none;
@@ -11259,6 +11268,13 @@ footer li {
 footer i {
   color: white;
   font-size: 150%;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+}
+footer a:hover {
+  color: yellow;
 }
 
 .loader {
@@ -11302,12 +11318,24 @@ footer i {
   position: relative;
 }
 
+@media screen and (max-width: 950px) {
+  .productsDisplay {
+    width: 100%;
+  }
+}
+
 .description {
   padding-top: 80px;
 }
 
 #cameraImage {
   object-fit: cover;
+  width: 50%;
+}
+@media screen and (max-width: 990px) {
+  #cameraImage {
+    width: fit-content;
+  }
 }
 
 .fa-star-half-alt,
@@ -11352,6 +11380,12 @@ footer i {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .oneArticle img {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

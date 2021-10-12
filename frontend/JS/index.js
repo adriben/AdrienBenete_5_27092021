@@ -3,14 +3,13 @@ const cameraContainer = document.getElementById('productsDisplay');
 const loader = document.querySelector('.loader'); //loader de la page d'acceuil
 
 //fonction principal qui reccupere les articles et les montres sur la page
-main() 
- async function main(){
+callApi() 
+ async function callApi(){
     const cameras = await getCameras(); //stockage de l'objet contenant les cameras reccupere par le fetch 
     loader.style.display = "none";
     for(camera of cameras)   //boucle qui itere sur tout les elements du tableau d objet cameras
         displayCameras()  
-    }
-
+}
 
 async function getCameras(){
     return fetch('http://localhost:3000/api/cameras') //appel a l api pour recupperer les donnes
@@ -25,8 +24,7 @@ async function getCameras(){
 
 function displayCameras() { //fonction pour faire apparaitre les cameras sur la page
     //html dans le container de la page principale
-    cameraContainer.innerHTML += `
-     
+    cameraContainer.innerHTML += `     
     <article class="card col-12 col-md-4 m-5 mt-4 p-0 pb-2 shadow">
       <img src="${camera.imageUrl}" alt="" class="card-img-top w-100">
       <div class="card-body">
@@ -38,8 +36,6 @@ function displayCameras() { //fonction pour faire apparaitre les cameras sur la 
       </div>
     </article>
     `;
-  
-    
 }
 
 function displayCartNumbers(){  //fonction qui affiche le nombre de produit dans le panier

@@ -9,7 +9,7 @@ if (cameraLocalStorage){ //on itere sur toutes les cameras pour faire un nouveau
     }
 }
 
-//Fonction qui fait apparaitre les cameras dans le panier si le local storage n est pas vide
+//FONCTION qui fait apparaitre les cameras dans le panier si le local storage n est pas vide
 function displayProduct(){
     if(cameraLocalStorage == null){
     document.querySelector('.products').innerHTML = "<h3 class='mt5 p-5'>Votre panier est vide pour le moment</h3>"
@@ -43,7 +43,7 @@ function displayCartNumbers(){  //fonction qui affiche le nombre de produit dans
 }
 displayCartNumbers()
 
-//FONCTION qui calcule le total du prix des articles dans le panier
+///////////////FONCTION qui calcule le total du prix des articles dans le panier
 let total = 0; 
 let individualPrice = document.querySelectorAll(".price");
 
@@ -65,7 +65,7 @@ let oneArticle = document.querySelectorAll(".oneArticle") //on stoke un article 
 let deleteBtn = document.querySelectorAll('.delete');
 let cameraQuantity = document.querySelectorAll(".camera-quantity")
 
-//FONCTION qui supprime l element et update le local storage au click sur la poubelle
+//////////////FONCTION qui supprime l element et update le local storage au click sur la poubelle
 for(let i=0; i< deleteBtn.length; i++){   
       deleteBtn[i].onclick = function (e){
       e.target.parentNode.parentNode.remove()  //on supprime l'element dans le html
@@ -81,14 +81,13 @@ for(let i=0; i< deleteBtn.length; i++){
    }
 }
 
-//Gerer la quantite du produit directement dans le panier
+///////////////////////GERER LA QUANTITE DEPUIS LE PANIER/////////////////////////
 
 let leftArrow = document.querySelectorAll('.arrow-left'); 
 let rightArrow = document.querySelectorAll('.arrow-right');
 
 //FONCTION qui reduit la quantite d un produit au click sur la fleche de gauche
 for(let i =0; i<leftArrow.length; i++){
-
     leftArrow[i].addEventListener('click', event =>{
     cameraQuantity[i].innerText -=1;
     productQuantity -= 1;
@@ -99,7 +98,7 @@ for(let i =0; i<leftArrow.length; i++){
     document.querySelector('.in-cart').textContent = productQuantity
     localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
     localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
-    
+        
         if(cameraQuantity[i].innerText == 0){ 
             cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
             productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
@@ -130,7 +129,7 @@ for(let i =0; i< rightArrow.length; i++){
     })
 }
 
-/////////////////////////////////Formulaire///////////////////////////////////
+/////////////////////////////////FORMULAIRE///////////////////////////////////
 
 //On stocke les champs du formulaire dans des variables
 let lastName = document.querySelector("#last-name");
@@ -162,13 +161,12 @@ form.addEventListener('submit', event =>{
                 },
                 products: cameraId
                 }
-
-                     
+     
             postOrder(order);
             }
 })
-
-async function postOrder(data){ // fonction method post pour envoyer les infos au back end
+// FONCTION method post pour envoyer les infos au back end
+async function postOrder(data){ 
     fetch("http://localhost:3000/api/cameras/order", {
         method: "POST",
         headers: {

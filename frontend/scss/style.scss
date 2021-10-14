@@ -1,5 +1,6 @@
 @import './variable_overrides';
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./keyframes";
 @font-face{
     src: url("/frontend/font/Carnevalee\ Freakshow.ttf");
     font-family: carnival;
@@ -11,7 +12,6 @@ body{
    
 }
 
-
 .fa-shopping-cart{
     background: -webkit-linear-gradient(#c77a5f, #925cf7);
    padding: 0 0 0 2px;
@@ -20,23 +20,22 @@ body{
     -webkit-text-fill-color: transparent;
 }
 
-
 header {
     font-size: 130%;
     a{
     font-weight: bold;
     color: #ffff;
     padding-left: 1rem;
-  }
-  li{
+   }
+   li{
       padding-left: 4rem;
       position: relative;
-  }
+   }
   .navbar-expand-lg .navbar-collapse{
     justify-content: flex-end;
-  }
-  
+  }  
 }
+
 .in-cart{
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -50,25 +49,8 @@ header {
     background: green;
     display: flex;
    justify-content: center;
-   align-items: center;
-   
-  
-   
+   align-items: center; 
 }
-
-@keyframes slow-display {  
-    0%{
-        transform: translateY(100px);
-        opacity: 0;
-    }
-    50%{
-        opacity: 0;
-    }
-   100%{
-       transform: translateY(0);
-       opacity: 1;
-   }   
-  }
 
 .hero{
     color: white;
@@ -89,7 +71,6 @@ header {
         top: 70%;
         left: 50%;
         transform: translate(-50%, -50%);
-
     p{
         font-size: 140%;
         animation: slow-display ease-out 1500ms ;
@@ -105,13 +86,8 @@ header {
             transform: scale(1.1);
             transition: 700ms;
         }
-        
     }
-    
   }}
-
-  
-
 
  .main-index{
     //  background-image: url('/frontend/images/texture.jpg');
@@ -128,55 +104,37 @@ header {
      min-height: 180px;
      @media screen and (max-width: 600px) {
         margin: 0 1rem;
-       
-
     }
-     
-    
-
      .details{
-       
-        
         justify-content: space-around;
         text-align: center;
-        
- 
- 
+     }
 }
 
-
- }
- article.card,
+article.card,
 .navbar-brand{
     transition: 1s;
     cursor: pointer;
     &:hover{
         transform: scale(1.05);
         transition: 500ms;
-
     }
-
 }
 
- footer{
+footer{
      color: white;
-    
      .row-footer{
          width: fit-content;
          margin: auto;
          align-items: center;
          justify-content: center;
-         
-
-
      }
      li{
          list-style: none;
      }
      i{
          color: white;
-         font-size: 150%;
-         
+         font-size: 150%; 
      }
      a{
          color: white;
@@ -187,7 +145,6 @@ header {
      }
  }
  //loader
-
  .loader{
      position: absolute;
      top: 850px;
@@ -216,37 +173,30 @@ header {
 .dot:nth-child(3){
     animation-delay: 0.3s;
 }
-
- ///page article
-
- .background img{
+ 
+///page article
+.background img{
     width: 100%;
     height: 300px;
     object-fit: cover;
     z-index: 0;
     position: relative;
-    
 }
 .productsDisplay{
     @media screen and (max-width: 950px) {
         width: 100%;
-       
-
     }
 }
 
 .description{
     padding-top: 80px;
-
-
 }
+
 #cameraImage{
     object-fit: cover;
     width: 50%;
     @media screen and (max-width: 990px) {
         width: fit-content ;
-    
-        
     }
 }
 
@@ -255,8 +205,7 @@ header {
     color: rgba(255, 167, 5, 1);
 }
 
-.products{ 
-    
+.products{  
   .oneArticle{
     border: solid 2px purple;
   }
@@ -265,7 +214,6 @@ header {
     &:hover{
         cursor: pointer;
     }
-   
 }}
 
 .arrow-right,
@@ -277,7 +225,6 @@ header {
 }
 
 //cart
-
 #total{
     font-size: 250%;
 }
@@ -286,6 +233,7 @@ header {
     font-family: sans-serif;
     font-size: 90%;
 }
+
 #address{
     width: 50%;
 }
@@ -298,15 +246,23 @@ header {
 }
 
 .oneArticle{
-   
     @media screen and (max-width: 400px) {
-        
         img{
             display: none;
         }
-       
-
     }
 }
 
-
+.postcode-city{
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .postale{
+        margin-right: 1rem;
+    }
+    
+}
+    

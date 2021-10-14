@@ -1,5 +1,4 @@
 //Recuperation des donnes du local storage et stockage dans des variables
-
 let cameraLocalStorage= JSON.parse(localStorage.getItem("productInCart"));
 let productQuantity = JSON.parse(localStorage.getItem("productQuantity"));
 let cameraId = []; //on fait un tableau d'id pour envoyer au backend dans la requete POST
@@ -87,7 +86,7 @@ for(let i=0; i< deleteBtn.length; i++){
 let leftArrow = document.querySelectorAll('.arrow-left'); 
 let rightArrow = document.querySelectorAll('.arrow-right');
 
-//fonction qui reduit la quantite d un produit au click sur la fleche de gauche
+//FONCTION qui reduit la quantite d un produit au click sur la fleche de gauche
 for(let i =0; i<leftArrow.length; i++){
 
     leftArrow[i].addEventListener('click', event =>{
@@ -115,7 +114,7 @@ for(let i =0; i<leftArrow.length; i++){
     }) 
 }
 
-//fonction qui ajoute la quantite d un produit au click sur la fleche de droite
+//FONCTION qui ajoute la quantite d un produit au click sur la fleche de droite
 for(let i =0; i< rightArrow.length; i++){
         rightArrow[i].addEventListener('click', event =>{
         cameraQuantity[i].innerText = parseInt(cameraQuantity[i].innerText)
@@ -131,10 +130,9 @@ for(let i =0; i< rightArrow.length; i++){
     })
 }
 
-///////////////Formulaire/////
+/////////////////////////////////Formulaire///////////////////////////////////
 
-//On stocke les champs du formulaire des variables
-
+//On stocke les champs du formulaire dans des variables
 let lastName = document.querySelector("#last-name");
 let firstName = document.querySelector('#first-name');
 let emailAddress = document.querySelector('#email');
@@ -165,28 +163,30 @@ form.addEventListener('submit', event =>{
                 products: cameraId
                 }
 
-                async function postOrder(data){ // fonction method post pour envoyer les infos au back end
-                    fetch("http://localhost:3000/api/cameras/order", {
-                        method: "POST",
-                        headers: {
-                        "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data),
-                    }).then((responseJ) =>{
-                        return responseJ.json()
-                    }).then(result =>{
-                        localStorage.setItem("orderId", JSON.stringify(result.orderId));
-                        localStorage.setItem('totalPrice', JSON.stringify(total));
-                        document.location.href="./order.html";
-                        return result
-                          
-                    } ).catch(err =>{
-                        alert("Il semble qu'il y ai une erreur avec le serveur, veuillez réessayer ulterieurment")
-                    })                            
-                    }          
+                     
             postOrder(order);
             }
 })
+
+async function postOrder(data){ // fonction method post pour envoyer les infos au back end
+    fetch("http://localhost:3000/api/cameras/order", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+    }).then((responseJ) =>{
+        return responseJ.json()
+    }).then(result =>{
+        localStorage.setItem("orderId", JSON.stringify(result.orderId));
+        localStorage.setItem('totalPrice', JSON.stringify(total));
+        document.location.href="./order.html";
+        return result
+          
+    } ).catch(err =>{
+        alert("Il semble qu'il y ai une erreur avec le serveur, veuillez réessayer ulterieurment")
+    })                            
+    };     
 
 
 

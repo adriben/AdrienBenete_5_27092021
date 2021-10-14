@@ -67,35 +67,37 @@
     </section>
     <section class="pt-5 card mt-4 bg-light pl-0">
       <h2 class="text-center">Passer votre commande</h2>
-      <form class="pb-4" id="my-form">
-        <div class="text-center pt-4">
-          <div class="text-center">
-          <label for="last-name" >Nom</label>
+      <form class="pb-4 container" id="my-form">
+        <div class="text-center pt-4 row">
+          <div class="text-center col-md-4 pt-2">
+          <label for="last-name">Nom</label>
           <input type="text" id="last-name" name="nom" required pattern="[a-zA-ZÀ-ÿ ]{1,32}" minlength="2">
         </div>
-        <div class="pt-2">
+        <div class="pt-2 col-md-4">
           <label for="first-name">Prenom</label>
           <input type="text" id="first-name" name="prenom" required pattern="[a-zA-ZÀ-ÿ ]{1,32}" minlength="2">
         </div> 
-        <div class="pt-2">
+        <div class="pt-2 col-md-4">
           <label for="email">Adresse email</label>
           <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
         </div>
       </div>
-        <div class="text-center mt-4 pt-4">
-          <div class="pt-2">
+        <div class="text-center pt-4 row">
+          <div>
           <label for="address">Votre Adresse</label>
           <input type="text" id="address" name="adresse" required>
           </div>
-          <div class="pt-2">
+          <div class="container postcode-city">
+          <div class="pt-2 postale">
           <label for="postcode">Code postale</label>
           <input type="text" id="postcode" name="code-postale" required pattern="[0-9]*" minlength="4">
         </div>
-        <div class="pt-2">
+        <div class="pt-2 pl-2">
           <label for="city">Ville</label>
           <input type="text" id="city" name="ville" required minlength="2" maxlength="50" pattern="[A-Za-z]{1,32}">
         </div>
         </div>
+      </div>
         <div class="text-center pt-4">
         <button type="submit" class="text-center btn-primary p-2" id="submit">Procceder au paiement</button>
         <img src="/frontend/images/secured.png" alt="payment securise logo"  height="75">

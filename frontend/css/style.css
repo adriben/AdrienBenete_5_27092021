@@ -1,9 +1,4 @@
 @charset "UTF-8";
-@keyframes turn {
-  100% {
-    transform: translateY(-30px);
-  }
-}
 /*!
  * Bootstrap v5.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -11119,6 +11114,24 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@keyframes slow-display {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes turn {
+  100% {
+    transform: translateY(-30px);
+  }
+}
 @font-face {
   src: url("/frontend/font/Carnevalee Freakshow.ttf");
   font-family: carnival;
@@ -11168,19 +11181,6 @@ header .navbar-expand-lg .navbar-collapse {
   align-items: center;
 }
 
-@keyframes slow-display {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 .hero {
   color: white;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/frontend/images/benjamin-combs-hiAdjnXZxl8-unsplash.jpg");
@@ -11386,6 +11386,20 @@ footer a:hover {
   .oneArticle img {
     display: none;
   }
+}
+
+.postcode-city {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 800px) {
+  .postcode-city {
+    flex-direction: column;
+  }
+}
+.postcode-city .postale {
+  margin-right: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */

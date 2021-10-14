@@ -1,4 +1,4 @@
-export async function getCameras(){
+async function getCameras(){
     return fetch('http://localhost:3000/api/cameras') //appel a l api pour recupperer les donnes
     .then((responsehttp) =>{
         return responsehttp.json() //reccuperation des donnes au format json
@@ -9,3 +9,4 @@ export async function getCameras(){
     })
 };
 
+export { getCameras }

@@ -18,13 +18,13 @@ async function displayCamera(){ //affichage de la camera selectionner dans la pa
     }   
 }
 
-
-async function getCameraID(){ //on recupere l id de la camera que l on a passer dans le lien de la page
+//Recuperation de l id de la camera que l on a passer dans le lien de la page
+async function getCameraID(){ 
     return new URL (location.href).searchParams.get('id'); 
 }
 
-
-async function getCamera(cameraID){ //on recupere l'objet unique grace a la fonction preccedente et l id de la camera
+//Reccuperation de l'objet unique grace a la fonction preccedente et l id de la camera
+async function getCamera(cameraID){ 
     return fetch(`http://localhost:3000/api/cameras/${cameraID}`)
     .then((responsehttp) =>{
         return responsehttp.json()
@@ -34,10 +34,11 @@ async function getCamera(cameraID){ //on recupere l'objet unique grace a la fonc
         return document.querySelector('.productsDisplay').innerHTML = "<h3 class='text-center mt-5'>Il semble que le serveur ne soit pas actif, veuillez reessayez dans 1 minute <br/>Nous sommes désolé pour la gêne occasionnée...</h3>"
     })
 };
+//bouton ajouter au panier
+const addToCartButton = document.querySelector('#add-to-cart'); 
 
-const addToCartButton = document.querySelector('#add-to-cart'); //bouton ajouter au panier
-
-addToCartButton.addEventListener('click',  event =>{ //au click on ajoute l article au panier et on remercie le client
+//FONCTION qui au click on ajoute l article au panier et on remercie le client
+addToCartButton.addEventListener('click',  event =>{ 
     event.preventDefault();
     document.querySelector('.alert').innerText = "Vous avez bien ajouté cette camera à votre panier, merci"
     document.querySelector('.alert').className += " alert-success";
@@ -45,7 +46,7 @@ addToCartButton.addEventListener('click',  event =>{ //au click on ajoute l arti
     addToCart()
 })
 
-//fonction qui affiche le nombre de produits dans le panier au chargement de la page
+//FONCTION qui affiche le nombre de produits dans le panier au chargement de la page
 function displayCartNumbers(){ 
     let inLocalStorage = localStorage.getItem("productQuantity");
 
@@ -54,19 +55,26 @@ function displayCartNumbers(){
     }
 }
 
+function addQuantity(){
+    quantity = parseInt(document.getElementById('quantity-select').value)
+    let inLocalStorage = localStorage.getItem("productQuantity");
+    inLocalStorage = parseInt(inLocalStorage)
+    if(inLocalStorage){
+        localStorage.setItem("productQuantity", inLocalStorage + quantity) //on ajoute le produit au produit existant si il y a deja un produit
+        document.querySelector('.in-cart').textContent = inLocalStorage + quantity; 
+       }else{
+        localStorage.setItem("productQuantity", quantity) //si le localstorage est vide, on ajoute le produit a l icone du panier
+        document.querySelector('.in-cart').textContent = quantity;
+       }
+}
+
 //FONCTION qui ajoute le produit au local storage
 function addToCart(){
     quantity = parseInt(document.getElementById('quantity-select').value)
     let inLocalStorage = localStorage.getItem("productQuantity");
     inLocalStorage = parseInt(inLocalStorage);//on converti le string du json du localstorage en number
 
-   if(inLocalStorage){
-    localStorage.setItem("productQuantity", inLocalStorage + quantity) //on ajoute le produit au produit existant si il y a deja un produit
-    document.querySelector('.in-cart').textContent = inLocalStorage + quantity; 
-   }else{
-    localStorage.setItem("productQuantity", quantity) //si le localstorage est vide, on ajoute le produit a l icone du panier
-    document.querySelector('.in-cart').textContent = quantity;
-   }
+  addQuantity()
 
    let cameraAdded = {//on creer un objet avec des valeurs 
     name: document.getElementById('camera-title').innerText,

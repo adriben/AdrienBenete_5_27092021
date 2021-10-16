@@ -73,7 +73,7 @@ for(let i=0; i< deleteBtn.length; i++){
       productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
       localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
       localStorage.setItem("productQuantity", JSON.stringify(productQuantity))//on retransforme les valeurs en JSOn
-      location.reload()
+      document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
         if(productQuantity == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
             localStorage.clear();
             location.reload()

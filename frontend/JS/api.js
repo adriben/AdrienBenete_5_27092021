@@ -1,7 +1,12 @@
-const cameraContainer = document.getElementById('productsDisplay'); 
-
-export const  getCameras = async () =>{
-    return fetch('http://localhost:3000/api/cameras'); //appel a l api pour recupperer les donnes
+export const  getCameras = async (param, method, data) =>{
+     
+    return fetch(`http://localhost:3000/api/cameras/${param}`,  {
+    method: method,
+    headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+}); //appel a l api pour recupperer les donnes
     
 };
 

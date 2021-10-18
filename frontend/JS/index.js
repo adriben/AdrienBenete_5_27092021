@@ -6,7 +6,7 @@ const loader = document.querySelector('.loader'); //loader de la page d'acceuil
 //fonction principal qui reccupere les articles et les montres sur la page
 callApi() 
  async function callApi(){
-   const cameras = await getCameras()
+   const cameras = await getCameras(" ", "GET")
     .then((responsehttp) =>{
         return responsehttp.json() //reccuperation des donnes au format json
     }).then(response =>{

@@ -1,8 +1,17 @@
+import { getCameras } from "./api.js";
 displayCamera() //fonction principale de la page article
 
 async function displayCamera(){ //affichage de la camera selectionner dans la page precedente
     const cameraID = await getCameraID(); //fonction qui reccupere l id unique
-    const camera = await getCamera(cameraID);
+    const camera = await getCameras(cameraID)
+    .then((responsehttp) =>{
+        console.log('je');
+        return responsehttp.json()
+    }).then(response =>{
+        return response
+    }).catch(err =>{
+        return document.querySelector('.productsDisplay').innerHTML = "<h3 class='text-center mt-5'>Il semble que le serveur ne soit pas actif, veuillez reessayez dans 1 minute <br/>Nous sommes désolé pour la gêne occasionnée...</h3>"
+    })
     
     document.getElementById('cameraImage').setAttribute('src', `${camera.imageUrl}`);
     document.getElementById('camera-description').innerText = camera.description;
@@ -11,9 +20,9 @@ async function displayCamera(){ //affichage de la camera selectionner dans la pa
 
     let selection = document.querySelector("#lens-select")
     let lenses = camera.lenses;
-    for(lens of lenses){
+    for(let i=0; i<lenses.length; i++){
         let option = document.createElement('option');  //on creer les options pour les lentilles
-        option.innerText = lens;
+        option.innerText = lenses[i];
         selection.appendChild(option)
     }   
 }
@@ -24,16 +33,7 @@ async function getCameraID(){
 }
 
 //Reccuperation de l'objet unique grace a la fonction preccedente et l id de la camera
-async function getCamera(cameraID){ 
-    return fetch(`http://localhost:3000/api/cameras/${cameraID}`)
-    .then((responsehttp) =>{
-        return responsehttp.json()
-    }).then(response =>{
-        return response
-    }).catch(err =>{
-        return document.querySelector('.productsDisplay').innerHTML = "<h3 class='text-center mt-5'>Il semble que le serveur ne soit pas actif, veuillez reessayez dans 1 minute <br/>Nous sommes désolé pour la gêne occasionnée...</h3>"
-    })
-};
+
 //bouton ajouter au panier
 const addToCartButton = document.querySelector('#add-to-cart'); 
 
@@ -56,7 +56,7 @@ function displayCartNumbers(){
 }
 
 function addQuantity(){
-    quantity = parseInt(document.getElementById('quantity-select').value)
+    let quantity = parseInt(document.getElementById('quantity-select').value)
     let inLocalStorage = localStorage.getItem("productQuantity");
     inLocalStorage = parseInt(inLocalStorage)
     if(inLocalStorage){
@@ -70,7 +70,7 @@ function addQuantity(){
 
 //FONCTION qui ajoute le produit au local storage
 function addToCart(){
-    quantity = parseInt(document.getElementById('quantity-select').value)
+    let quantity = parseInt(document.getElementById('quantity-select').value)
     let inLocalStorage = localStorage.getItem("productQuantity");
     inLocalStorage = parseInt(inLocalStorage);//on converti le string du json du localstorage en number
 

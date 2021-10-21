@@ -4,6 +4,7 @@ let cameraLocalStorage= JSON.parse(localStorage.getItem("productInCart"));
 let productQuantity = JSON.parse(localStorage.getItem("productQuantity"));
 let cameraId = []; //on fait un tableau d'id pour envoyer au backend dans la requete POST
 
+
 if (cameraLocalStorage){ //on itere sur toutes les cameras pour faire un nouveau tableau d id
     for(let i=0; i< cameraLocalStorage.length; i++){
     cameraId.push(cameraLocalStorage[i].id)
@@ -67,11 +68,12 @@ calculateTotal()
 
 let oneArticle = document.querySelectorAll(".oneArticle") //on stoke un article et les boutons poubelles dans des variables
 let deleteBtn = document.querySelectorAll('.delete');
-let cameraQuantity = document.querySelectorAll(".camera-quantity")
+let cameraQuantity = document.querySelectorAll(".camera-quantity");
 
 //////////////FONCTION qui supprime l element et update le local storage au click sur la poubelle
 for(let i=0; i< deleteBtn.length; i++){   
       deleteBtn[i].onclick = function (e){
+        // console.log(cameraLocalStorage[i].quantity);
         total -= cameraLocalStorage[i].price * cameraLocalStorage[i].quantity
         cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
         productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier

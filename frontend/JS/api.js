@@ -6,7 +6,7 @@ export const  getCameras = async (param, method, data) =>{
         "Content-Type": "application/json"
         },
         body: JSON.stringify(data),
-}); //appel a l api pour recupperer les donnes
+});  
     
 };
 

@@ -5,7 +5,6 @@ async function displayCamera(){ //affichage de la camera selectionner dans la pa
     const cameraID = await getCameraID(); //fonction qui reccupere l id unique
     const camera = await getCameras(cameraID)
     .then((responsehttp) =>{
-        console.log('je');
         return responsehttp.json()
     }).then(response =>{
         return response

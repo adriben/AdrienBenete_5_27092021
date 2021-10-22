@@ -21,8 +21,8 @@ function displayProduct(){
         document.querySelector('.products').innerHTML += `
         <div class="row mt-4 oneArticle">
         <img class="w-25 col" src="${camera.img}">
-        <p class="col pt-5">${camera.name} </p>
-        <p class="col pt-5">${camera.lens}</p>
+        <p class="col pt-5 camera-name">${camera.name} </p>
+        <p class="col pt-5 camera-lens">${camera.lens}</p>
         <p class="col pt-5"><i class="far fa-arrow-alt-circle-left arrow-left"></i>
         x<span class="camera-quantity">${camera.quantity}</span> 
         <i class="far fa-arrow-alt-circle-right arrow-right"></i>
@@ -49,6 +49,7 @@ displayCartNumbers()
 let total = 0; 
 let individualPrice = document.querySelectorAll(".price");
 
+
 function calculateTotal(){
     let price= []; //tableau vide ou on va pusher les prix
      total = 0
@@ -60,58 +61,109 @@ function calculateTotal(){
         total += Number(price[i])
        }      
        document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
-       console.log('hello');
 }
 calculateTotal()
 // on affiche la valeur du total dans le total du html
+cameraLocalStorage
 
+function deleteProduct(onPageDeleteName, onPageDeleteQuantity, onPageDeleteLens){
+    for(let j = 0; j<cameraLocalStorage.length; j++){
+        if (onPageDeleteName == cameraLocalStorage[j].name && onPageDeleteQuantity == cameraLocalStorage[j].quantity && onPageDeleteLens == cameraLocalStorage[j].lens){
 
+            total -= cameraLocalStorage[j].price * cameraLocalStorage[j].quantity
+            cameraLocalStorage.splice(j, 1)   //on supprime le produit du local storage avec son index
+            productQuantity -= cameraQuantity[j].innerText  //on retire les elements du panier
+            break
+    }
+}
+}
+console.log(cameraLocalStorage);
 let oneArticle = document.querySelectorAll(".oneArticle") //on stoke un article et les boutons poubelles dans des variables
 let deleteBtn = document.querySelectorAll('.delete');
 let cameraQuantity = document.querySelectorAll(".camera-quantity");
-
+let cameraName = document.querySelectorAll(".camera-name");
+let cameraLense = document.querySelectorAll(".camera-lens")
 //////////////FONCTION qui supprime l element et update le local storage au click sur la poubelle
 for(let i=0; i< deleteBtn.length; i++){   
       deleteBtn[i].onclick = function (e){
-        // console.log(cameraLocalStorage[i].quantity);
-        total -= cameraLocalStorage[i].price * cameraLocalStorage[i].quantity
-        cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
-        productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
-        localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
-        localStorage.setItem("productQuantity", JSON.stringify(productQuantity))//on retransforme les valeurs en JSOn
+
+        deleteProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText )
+        
         e.target.parentNode.remove();
-        document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
+        recalculateTotal()
+
         if(productQuantity == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
             localStorage.clear();
             location.reload()
-        } 
+        }
+    
+
+           
+        
    }
+   
 }
 
 ///////////////////////GERER LA QUANTITE DEPUIS LE PANIER/////////////////////////
-
+let oneLinePrice = 0;
+let oneLineQuantity = 0;
 let leftArrow = document.querySelectorAll('.arrow-left'); 
 let rightArrow = document.querySelectorAll('.arrow-right');
 
-//FONCTION qui reduit la quantite d un produit au click sur la fleche de gauche
-for(let i =0; i<leftArrow.length; i++){
-    leftArrow[i].addEventListener('click', event =>{
-    cameraQuantity[i].innerText -=1;
-    productQuantity -= 1;
-    cameraLocalStorage[i].quantity -=1;
-    individualPrice[i].innerText -= cameraLocalStorage[i].price;
-    total -= cameraLocalStorage[i].price
+function decrementProduct(onPagedecrementName, onPageDecrementQuantity, onPageDecrementLens){
+    for(let j = 0; j<cameraLocalStorage.length; j++){
+        if (onPagedecrementName == cameraLocalStorage[j].name && onPageDecrementQuantity == cameraLocalStorage[j].quantity && onPageDecrementLens == cameraLocalStorage[j].lens){
+            cameraLocalStorage[j].quantity -= 1
+            cameraQuantity[j].innerText -= 1
+            individualPrice[j].innerText = cameraLocalStorage[j].price *  cameraLocalStorage[j].quantity ;
+            oneLinePrice = individualPrice[j].innerText;
+            oneLineQuantity = cameraQuantity[j].innerText
+            
+            total -= cameraLocalStorage[j].price
+          break
+    }
+}
+}
+
+function incrementProduct(onPageIncrementName, onPageIncrementLens){
+    for(let j = 0; j<cameraLocalStorage.length; j++){
+        if (onPageIncrementName == cameraLocalStorage[j].name && onPageIncrementLens == cameraLocalStorage[j].lens){
+            cameraLocalStorage[j].quantity += 1
+            cameraQuantity[j].innerText = cameraLocalStorage[j].quantity
+            let productPrice = cameraLocalStorage[j].quantity * cameraLocalStorage[j].price
+            individualPrice[j].innerText = productPrice;
+            
+            oneLinePrice = individualPrice[j].innerText;
+            oneLineQuantity = cameraQuantity[j].innerText
+            
+           
+            total += cameraLocalStorage[j].price
+          break
+    }
+}
+}
+
+function recalculateTotal(){
     document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
     document.querySelector('.in-cart').textContent = productQuantity
     localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
     localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
+}
+
+//FONCTION qui reduit la quantite d un produit au click sur la fleche de gauche
+for(let i =0; i<leftArrow.length; i++){
+    leftArrow[i].addEventListener('click', event =>{
+       
+        decrementProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText)
         
-        if(cameraQuantity[i].innerText == 0){ 
-            cameraLocalStorage.splice(i, 1)   //on supprime le produit du local storage avec son index
-            productQuantity -= cameraQuantity[i].innerText  //on retire les elements du panier
-            localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
-            localStorage.setItem("productQuantity", JSON.stringify(productQuantity))//on retransforme les valeurs en JSOn
-            event.target.parentNode.parentNode.remove()
+        productQuantity -= 1;
+        individualPrice[i].innerText = oneLinePrice;
+        cameraQuantity[i].innerText = oneLineQuantity
+        recalculateTotal()
+        if(cameraQuantity[i].innerText < 1){ 
+            deleteProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText )
+            event.target.parentNode.parentNode.remove();
+            recalculateTotal()
                 if(productQuantity == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
                     localStorage.clear();
                     location.reload()
@@ -123,16 +175,13 @@ for(let i =0; i<leftArrow.length; i++){
 //FONCTION qui ajoute la quantite d un produit au click sur la fleche de droite
 for(let i =0; i< rightArrow.length; i++){
         rightArrow[i].addEventListener('click', event =>{
-        cameraQuantity[i].innerText = parseInt(cameraQuantity[i].innerText)
-        cameraQuantity[i].innerText =  Number( cameraQuantity[i].innerText) + 1;
+
+        incrementProduct(cameraName[i].innerText, cameraLense[i].innerText)
         productQuantity += 1;
-        cameraLocalStorage[i].quantity +=1;
-        individualPrice[i].innerText =  cameraLocalStorage[i].quantity * cameraLocalStorage[i].price 
-         total += cameraLocalStorage[i].price
-        document.querySelector('#total').innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
-        document.querySelector('.in-cart').textContent = productQuantity
-        localStorage.setItem("productInCart", JSON.stringify(cameraLocalStorage)); 
-        localStorage.setItem("productQuantity", JSON.stringify(productQuantity))
+        individualPrice[i].innerText = oneLinePrice;
+        cameraQuantity[i].innerText = oneLineQuantity
+
+        recalculateTotal()
     })
 }
 

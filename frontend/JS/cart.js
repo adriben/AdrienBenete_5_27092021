@@ -69,16 +69,13 @@ cameraLocalStorage
 function deleteProduct(onPageDeleteName, onPageDeleteQuantity, onPageDeleteLens){
     for(let j = 0; j<cameraLocalStorage.length; j++){
         if (onPageDeleteName == cameraLocalStorage[j].name && onPageDeleteQuantity == cameraLocalStorage[j].quantity && onPageDeleteLens == cameraLocalStorage[j].lens){
-
+            productQuantity -= cameraLocalStorage[j].quantity 
             total -= cameraLocalStorage[j].price * cameraLocalStorage[j].quantity
-            cameraLocalStorage.splice(j, 1)   //on supprime le produit du local storage avec son index
-            productQuantity -= cameraQuantity[j].innerText  //on retire les elements du panier
-            break
+            cameraLocalStorage.splice(j, 1)   //on supprime le produit du local storage avec son index        
     }
 }
 }
-console.log(cameraLocalStorage);
-let oneArticle = document.querySelectorAll(".oneArticle") //on stoke un article et les boutons poubelles dans des variables
+
 let deleteBtn = document.querySelectorAll('.delete');
 let cameraQuantity = document.querySelectorAll(".camera-quantity");
 let cameraName = document.querySelectorAll(".camera-name");
@@ -86,9 +83,7 @@ let cameraLense = document.querySelectorAll(".camera-lens")
 //////////////FONCTION qui supprime l element et update le local storage au click sur la poubelle
 for(let i=0; i< deleteBtn.length; i++){   
       deleteBtn[i].onclick = function (e){
-
-        deleteProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText )
-        
+        deleteProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText )    
         e.target.parentNode.remove();
         recalculateTotal()
 
@@ -96,14 +91,8 @@ for(let i=0; i< deleteBtn.length; i++){
             localStorage.clear();
             location.reload()
         }
-    
-
-           
-        
    }
-   
 }
-
 ///////////////////////GERER LA QUANTITE DEPUIS LE PANIER/////////////////////////
 let oneLinePrice = 0;
 let oneLineQuantity = 0;
@@ -114,31 +103,27 @@ function decrementProduct(onPagedecrementName, onPageDecrementQuantity, onPageDe
     for(let j = 0; j<cameraLocalStorage.length; j++){
         if (onPagedecrementName == cameraLocalStorage[j].name && onPageDecrementQuantity == cameraLocalStorage[j].quantity && onPageDecrementLens == cameraLocalStorage[j].lens){
             cameraLocalStorage[j].quantity -= 1
-            cameraQuantity[j].innerText -= 1
-            individualPrice[j].innerText = cameraLocalStorage[j].price *  cameraLocalStorage[j].quantity ;
+            cameraQuantity[j].innerText = cameraLocalStorage[j].quantity
+            let productPrice = cameraLocalStorage[j].quantity * cameraLocalStorage[j].price
+            individualPrice[j].innerText = productPrice;
             oneLinePrice = individualPrice[j].innerText;
-            oneLineQuantity = cameraQuantity[j].innerText
-            
+            oneLineQuantity = cameraLocalStorage[j].quantity
             total -= cameraLocalStorage[j].price
-          break
     }
 }
 }
 
-function incrementProduct(onPageIncrementName, onPageIncrementLens){
+function incrementProduct(onPageIncrementName, onPageIncrementQuantity, onPageIncrementLens){
     for(let j = 0; j<cameraLocalStorage.length; j++){
-        if (onPageIncrementName == cameraLocalStorage[j].name && onPageIncrementLens == cameraLocalStorage[j].lens){
+        if (onPageIncrementName == cameraLocalStorage[j].name && onPageIncrementQuantity == cameraLocalStorage[j].quantity && onPageIncrementLens == cameraLocalStorage[j].lens){
             cameraLocalStorage[j].quantity += 1
             cameraQuantity[j].innerText = cameraLocalStorage[j].quantity
             let productPrice = cameraLocalStorage[j].quantity * cameraLocalStorage[j].price
             individualPrice[j].innerText = productPrice;
-            
             oneLinePrice = individualPrice[j].innerText;
-            oneLineQuantity = cameraQuantity[j].innerText
-            
-           
+            oneLineQuantity = cameraLocalStorage[j].quantity
             total += cameraLocalStorage[j].price
-          break
+         
     }
 }
 }
@@ -153,18 +138,18 @@ function recalculateTotal(){
 //FONCTION qui reduit la quantite d un produit au click sur la fleche de gauche
 for(let i =0; i<leftArrow.length; i++){
     leftArrow[i].addEventListener('click', event =>{
-       
-        decrementProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText)
-        
+        oneLineQuantity = 0
+        decrementProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText) 
         productQuantity -= 1;
         individualPrice[i].innerText = oneLinePrice;
         cameraQuantity[i].innerText = oneLineQuantity
+        console.log(oneLineQuantity);
         recalculateTotal()
-        if(cameraQuantity[i].innerText < 1){ 
+        if(oneLineQuantity  < 1){ 
             deleteProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText )
             event.target.parentNode.parentNode.remove();
-            recalculateTotal()
-                if(productQuantity == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
+                       
+                if(total == 0){  //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message 
                     localStorage.clear();
                     location.reload()
                 }
@@ -175,16 +160,15 @@ for(let i =0; i<leftArrow.length; i++){
 //FONCTION qui ajoute la quantite d un produit au click sur la fleche de droite
 for(let i =0; i< rightArrow.length; i++){
         rightArrow[i].addEventListener('click', event =>{
-
-        incrementProduct(cameraName[i].innerText, cameraLense[i].innerText)
+            oneLineQuantity = 0
+        incrementProduct(cameraName[i].innerText, cameraQuantity[i].innerText, cameraLense[i].innerText)
         productQuantity += 1;
         individualPrice[i].innerText = oneLinePrice;
         cameraQuantity[i].innerText = oneLineQuantity
-
         recalculateTotal()
+        
     })
 }
-
 /////////////////////////////////FORMULAIRE///////////////////////////////////
 
 //On stocke les champs du formulaire dans des variables
@@ -225,17 +209,9 @@ form.addEventListener('submit', event =>{
                 localStorage.setItem("orderId", JSON.stringify(result.orderId));
                 localStorage.setItem('totalPrice', JSON.stringify(total));
                 document.location.href="./order.html";
-                return result
-                  
+                return result                  
             } ).catch(err =>{
                 alert("Il semble qu'il y ai une erreur avec le serveur, veuillez réessayer ulterieurment")
             });    
             }
 })
-
-
-       
-
-
-
-

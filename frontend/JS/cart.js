@@ -123,7 +123,7 @@ function incrementProduct(onPageIncrementName, onPageIncrementQuantity, onPageIn
             oneLinePrice = individualPrice[j].innerText;
             oneLineQuantity = cameraLocalStorage[j].quantity
             total += cameraLocalStorage[j].price
-         
+        
     }
 }
 }

@@ -1,5 +1,5 @@
-export const getCameras = async (param, method, data) => {
-  return fetch(`http://localhost:3000/api/cameras/${param}`, {
+export const getCameras = async (route, method, data) => {
+  return fetch(`http://localhost:3000/api/cameras/${route}`, {
     method: method,
     headers: {
       "Content-Type": "application/json",

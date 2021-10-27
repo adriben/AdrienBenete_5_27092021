@@ -187,16 +187,16 @@ for (let i = 0; i < leftArrow.length; i++) {
     productQuantity -= 1;
     individualPrice[i].innerText = oneLinePrice;
     cameraQuantity[i].innerText = oneLineQuantity;
-    console.log(oneLineQuantity);
     recalculateTotal();
-    if (oneLineQuantity < 1) {
+   
+    if (oneLinePrice == 0) {
       deleteProduct(
         cameraName[i].innerText,
         cameraQuantity[i].innerText,
         cameraLense[i].innerText
       );
       event.target.parentNode.parentNode.remove();
-
+      recalculateTotal();
       if (total == 0) {
         //si il n'y a plus rien dans le local storage on supprime tout pour mettre a jour le message
         localStorage.clear();

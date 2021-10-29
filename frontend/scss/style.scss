@@ -62,6 +62,7 @@ header {
     width: 100%;
     justify-content: center;
     position: relative;
+
     .hero-text{
         position: absolute;
         display: flex;
@@ -74,7 +75,11 @@ header {
     p{
         font-size: 140%;
         animation: slow-display ease-out 1500ms ;
+        @media screen and (max-width: 350px) {
+            display: none;
+        }
     }
+    
     a{
         background-color: white;
         color: black;

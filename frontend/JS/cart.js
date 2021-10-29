@@ -139,6 +139,7 @@ function decrementProduct(
       oneLinePrice = individualPrice[j].innerText;
       oneLineQuantity = cameraLocalStorage[j].quantity;
       total -= cameraLocalStorage[j].price;
+      break
     }
   }
 }
@@ -162,6 +163,7 @@ function incrementProduct(
       oneLinePrice = individualPrice[j].innerText;
       oneLineQuantity = cameraLocalStorage[j].quantity;
       total += cameraLocalStorage[j].price;
+      break
     }
   }
 }

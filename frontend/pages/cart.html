@@ -71,7 +71,7 @@
       <div class="text-center pt-4 row">
           <div>
             <label for="address">Votre Adresse</label>
-            <input type="text" id="address" name="adresse" required>
+            <input type="text" id="address" name="adresse" required pattern="[a-z0-9A-ZÀ-ÿ ]{1,32}" minlength="4">
           </div>
           <div class="container postcode-city">
             <div class="pt-2 postale">

@@ -251,6 +251,7 @@ form.addEventListener("submit", (event) => {
       "Veuillez finir de remplir le formulaire avant de procceder au payment"
     );
   } else if (form.reportValidity()) {
+    console.log(form.reportValidity())
     // on stock les valeur du formulaire dans un objet comme dans controller camera.js
     let order = {
       contact: {

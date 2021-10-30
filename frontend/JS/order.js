@@ -1,3 +1,4 @@
+//affichage du numero de commande et du prix dans la page de confirmation
 let orderId = localStorage.getItem("orderId");
 orderId = JSON.parse(orderId);
 

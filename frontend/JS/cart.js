@@ -120,7 +120,7 @@ let oneLineQuantity = 0;
 let leftArrow = document.querySelectorAll(".arrow-left");
 let rightArrow = document.querySelectorAll(".arrow-right");
 
-function decrementProduct(
+function decrementProduct( //fonction qui reduit la quantite
   onPagedecrementName,
   onPageDecrementQuantity,
   onPageDecrementLens
@@ -144,7 +144,7 @@ function decrementProduct(
   }
 }
 
-function incrementProduct(
+function incrementProduct( //fonction qui incremente la quantite 
   onPageIncrementName,
   onPageIncrementQuantity,
   onPageIncrementLens
@@ -168,7 +168,7 @@ function incrementProduct(
   }
 }
 
-function recalculateTotal() {
+function recalculateTotal() { //fonction qui recalcule le total
   document.querySelector(
     "#total"
   ).innerHTML = `Total: ${total},00 <span class="euro">€</span>`;
